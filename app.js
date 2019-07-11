@@ -19,7 +19,13 @@ document.addEventListener('DOMContentLoaded', () => {
     overlay.style.display = 'none';
   });
 
+  function getRandomPhraseAsArray(arr){
+    const randomPhrase = arr[Math.floor(Math.random() * arr.length)];
+    console.log(randomPhrase);
+    return randomPhrase;
+  }
 
+getRandomPhraseAsArray(phrases);
 
 
 
