@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const ul = document.querySelector('ul');
   const keyboard = document.querySelector('#qwerty');
   const phrase = document.getElementById('phrase');
+  const scoreboard = document.getElementById('scoreboard');
   let missed = 0;
 
   const overlay = document.getElementById('overlay');
@@ -44,7 +45,6 @@ document.addEventListener('DOMContentLoaded', () => {
   addPhrasetoDisplay(phraseArray);
 
   function checkLetter(guess) {
-
     const letterAnswers = document.querySelectorAll('.letter');
     const li = document.querySelectorAll('.letter');
     console.log(letterAnswers);
@@ -60,13 +60,19 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 // checkLetter();
 
-keyboard.addEventListener('click', (e) => {
-  const guess = e.target.textContent;
-  console.log(guess);
-  checkLetter(guess);
-  if (e.target.tagName === 'BUTTON') {
-    e.target.className += ' chosen'
-  }
+  keyboard.addEventListener('click', (e) => {
+    const guess = e.target.textContent;
+    console.log(guess);
+    if (e.target.tagName === 'BUTTON') {
+      e.target.className += ' chosen';
+      e.target.setAttribute('disabled', 'true');
+    }
+    const letterFound = checkLetter(guess);
+    if (letterFound === undefined) {
+      const ol = document.querySelector('ol');
+      const tries = document.querySelector('.tries');
+      ol.removeChild(tries);
+    }
 });
 
 
