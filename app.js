@@ -6,13 +6,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const overlay = document.getElementById('overlay');
   const btnReset = document.querySelector('.btn__reset');
 
+
   const phrases = [
-    `All that and a bag of chips`,
-    `Talk to the Hand`,
-    `Take A Chill Pill`,
-    `Eat My Shorts`,
-    `Hasta La Vista Baby`
+    `all that and a bag of chips`,
+    `talk to the hand`,
+    `take a chill pill`,
+    `eat my shorts`,
+    `hasta la vista baby`
   ];
+  const phraseArray = getRandomPhraseAsArray(phrases);
 
 
   overlay.addEventListener('click', (e) => {
@@ -25,10 +27,20 @@ document.addEventListener('DOMContentLoaded', () => {
     return randomPhrase;
   }
 
-getRandomPhraseAsArray(phrases);
+  function addPhrasetoDisplay(arr) {
+    const ul = document.querySelector('ul');
+    for (let i = 0; i < arr.length; i +=1) {
+     const li = document.createElement('li');
+     li.textContent = arr[i];
+     ul.appendChild(li);
+     if ( arr[i] !== ' '){
+        li.className = 'letter';
+      } else {
+        li.className = 'space';
+      }
+    }
+  }
 
-
-
-
+  
 
 });
