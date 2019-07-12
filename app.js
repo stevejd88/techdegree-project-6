@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const qwerty = document.getElementById('qwerty');
+  const ul = document.querySelector('ul');
+  const keyboard = document.querySelector('#qwerty');
   const phrase = document.getElementById('phrase');
   let missed = 0;
 
@@ -28,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function addPhrasetoDisplay(arr) {
-    const ul = document.querySelector('ul');
+
     for (let i = 0; i < arr.length; i +=1) {
      const li = document.createElement('li');
      li.textContent = arr[i];
@@ -40,7 +41,42 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   }
+  addPhrasetoDisplay(phraseArray);
 
-  
+  function checkLetter(guess) {
+
+    const letterAnswers = document.querySelectorAll('.letter');
+    const li = document.querySelectorAll('.letter');
+    console.log(letterAnswers);
+    let match;
+    for (let i = 0; i < letterAnswers.length; i +=1) {
+      let show = letterAnswers[i].textContent;
+      if (show === guess) {
+        li[i].className += ' show';
+        match = show;
+      }
+    }
+    return match;
+  }
+// checkLetter();
+
+keyboard.addEventListener('click', (e) => {
+  const guess = e.target.textContent;
+  console.log(guess);
+  checkLetter(guess);
+  if (e.target.tagName === 'BUTTON') {
+    e.target.className += ' chosen'
+  }
+});
+
+
+
+
+
+
+
+
+
+
 
 });
