@@ -58,7 +58,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     return match;
   }
-// checkLetter();
+
+function checkWin() {
+  const show = document.querySelectorAll('.show');
+  const li = document.querySelectorAll('.letter');
+  if (show.length === li.length) {
+    overlay.style.display = 'inline';
+    overlay.className = 'win';
+  } else  if (missed === 5) {
+    overlay.style.display = 'inline';
+    overlay.className = 'lose';
+  }
+}
 
   keyboard.addEventListener('click', (e) => {
     const guess = e.target.textContent;
@@ -72,7 +83,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const ol = document.querySelector('ol');
       const tries = document.querySelector('.tries');
       ol.removeChild(tries);
+      missed += 1;
     }
+    checkWin();
 });
 
 
