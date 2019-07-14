@@ -18,19 +18,19 @@ document.addEventListener('DOMContentLoaded', () => {
   ];
   const phraseArray = getRandomPhraseAsArray(phrases);
 
-
+// remove overlay at start of game
   overlay.addEventListener('click', (e) => {
     overlay.style.display = 'none';
   });
 
+// function to pull a random phrase as an array
   function getRandomPhraseAsArray(arr){
     const randomPhrase = arr[Math.floor(Math.random() * arr.length)];
     console.log(randomPhrase);
     return randomPhrase;
   }
-
+// function to add random phrase to board game
   function addPhrasetoDisplay(arr) {
-
     for (let i = 0; i < arr.length; i +=1) {
      const li = document.createElement('li');
      li.textContent = arr[i];
@@ -44,6 +44,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   addPhrasetoDisplay(phraseArray);
 
+// function comparing whether a guess
+// matches a letter from phrase
   function checkLetter(guess) {
     const letterAnswers = document.querySelectorAll('.letter');
     const li = document.querySelectorAll('.letter');
@@ -59,18 +61,25 @@ document.addEventListener('DOMContentLoaded', () => {
     return match;
   }
 
-function checkWin() {
-  const show = document.querySelectorAll('.show');
-  const li = document.querySelectorAll('.letter');
-  if (show.length === li.length) {
-    overlay.style.display = 'inline';
-    overlay.className = 'win';
-  } else  if (missed === 5) {
-    overlay.style.display = 'inline';
-    overlay.className = 'lose';
+// function that will  edit screen on win or lose
+  function checkWin() {
+    const show = document.querySelectorAll('.show');
+    const li = document.querySelectorAll('.letter');
+    const h1 = document.createElement('h1');
+    if (show.length === li.length) {
+      overlay.style.display = 'inline';
+      h1.textContent = 'YOU WIN!';
+      overlay.appendChild(h1);
+      overlay.className = 'win';
+    } else  if (missed === 5) {
+      overlay.style.display = 'inline';
+      h1.textContent = 'YOU LOSE!';
+      overlay.appendChild(h1);
+      overlay.className = 'lose';
+    }
   }
-}
 
+// event handler for letter clicking
   keyboard.addEventListener('click', (e) => {
     const guess = e.target.textContent;
     console.log(guess);
@@ -79,23 +88,13 @@ function checkWin() {
       e.target.setAttribute('disabled', 'true');
     }
     const letterFound = checkLetter(guess);
-    if (letterFound === undefined) {
+    if (letterFound === undefined && e.target.tagName === 'BUTTON') {
       const ol = document.querySelector('ol');
       const tries = document.querySelector('.tries');
       ol.removeChild(tries);
       missed += 1;
     }
     checkWin();
-});
-
-
-
-
-
-
-
-
-
-
+  });
 
 });
