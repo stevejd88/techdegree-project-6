@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const phraseArray = getRandomPhraseAsArray(phrases);
 
 // remove overlay at start of game
-  overlay.addEventListener('click', (e) => {
+  btnReset.addEventListener('click', (e) => {
     overlay.style.display = 'none';
   });
 
@@ -69,6 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (show.length === li.length) {
       overlay.style.display = 'inline';
       h1.textContent = 'YOU WIN!';
+      // btnReset.textContent = 'reset';
       overlay.appendChild(h1);
       overlay.className = 'win';
     } else  if (missed === 5) {
@@ -91,10 +92,22 @@ document.addEventListener('DOMContentLoaded', () => {
     if (letterFound === undefined && e.target.tagName === 'BUTTON') {
       const ol = document.querySelector('ol');
       const tries = document.querySelector('.tries');
+      const lostHeart = document.createElement('img');
+      lostHeart.setAttribute('src', 'images/lostHeart.png');
+      lostHeart.setAttribute('height', '35px');
+      lostHeart.setAttribute('width', '30px');
       ol.removeChild(tries);
+      ol.appendChild(lostHeart);
       missed += 1;
     }
     checkWin();
   });
+
+  // btnReset.addEventListener('click', (e) => {
+  //   if (btnReset.textContent === 'reset') {
+  //
+  //   }
+  // });
+
 
 });
