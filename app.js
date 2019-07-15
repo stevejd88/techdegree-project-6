@@ -117,23 +117,23 @@ function chosenReset() {
   }
 }
 
-// reset hearts
-// function heartReset() {
-//   const li = document.querySelectorAll('.miss');
-//   const img = document.querySelectorAll('.lost');
-//
-//   console.log(img);
-//   for (let i = 0; i < li.length; i++) {
-//     li[i].removeChild(img[i]);
-//     const liveHeart = document.createElement('img');
-//     liveHeart.setAttribute('src', 'images/liveHeart.png');
-//     liveHeart.setAttribute('height', '35px');
-//     liveHeart.setAttribute('width', '30px');
-//     li[i].appendChild(liveHeart);
-//     li[i].className = 'tries';
-//   }
-//
-// }
+reset hearts
+function heartReset() {
+  const li = document.querySelectorAll('.miss');
+  const img = document.querySelectorAll('.lost');
+
+  console.log(img);
+  for (let i = 0; i < li.length; i++) {
+    li[i].removeChild(img[i]);
+    const liveHeart = document.createElement('img');
+    liveHeart.setAttribute('src', 'images/liveHeart.png');
+    liveHeart.setAttribute('height', '35px');
+    liveHeart.setAttribute('width', '30px');
+    li[i].appendChild(liveHeart);
+    li[i].className = 'tries';
+  }
+
+}
 
 //reset button
   btnReset.addEventListener('click', (e) => {
@@ -146,7 +146,7 @@ function chosenReset() {
       const phraseArray = getRandomPhraseAsArray(phrases);
       addPhrasetoDisplay(phraseArray);
       chosenReset();
-      // heartReset();
+      heartReset();
 
       console.log(missed);
     }
