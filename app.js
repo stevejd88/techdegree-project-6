@@ -94,24 +94,46 @@ document.addEventListener('DOMContentLoaded', () => {
       const ol = document.querySelector('ol');
       const tries = document.querySelector('.tries');
       const lostHeart = document.createElement('img');
+      const li = document.createElement('li');
       lostHeart.setAttribute('src', 'images/lostHeart.png');
       lostHeart.setAttribute('height', '35px');
       lostHeart.setAttribute('width', '30px');
       ol.removeChild(tries);
-      ol.appendChild(lostHeart);
+      ol.appendChild(li);
+      li.className = 'miss';
+      li.appendChild(lostHeart);
+      lostHeart.className = 'lost';
       missed += 1;
     }
     checkWin();
   });
 
+// reset keyboard after win or lose
 function chosenReset() {
   const chosen = document.querySelectorAll('.chosen');
   for (let i = 0; i < chosen.length; i++) {
     chosen[i].className = ' ';
     chosen[i].removeAttribute('disabled');
   }
-
 }
+
+// reset hearts
+// function heartReset() {
+//   const li = document.querySelectorAll('.miss');
+//   const img = document.querySelectorAll('.lost');
+//
+//   console.log(img);
+//   for (let i = 0; i < li.length; i++) {
+//     li[i].removeChild(img[i]);
+//     const liveHeart = document.createElement('img');
+//     liveHeart.setAttribute('src', 'images/liveHeart.png');
+//     liveHeart.setAttribute('height', '35px');
+//     liveHeart.setAttribute('width', '30px');
+//     li[i].appendChild(liveHeart);
+//     li[i].className = 'tries';
+//   }
+//
+// }
 
 //reset button
   btnReset.addEventListener('click', (e) => {
@@ -120,10 +142,15 @@ function chosenReset() {
       while (ul.firstChild) {
         ul.removeChild(ul.firstChild);
       }
+      let missed = 0;
       const phraseArray = getRandomPhraseAsArray(phrases);
       addPhrasetoDisplay(phraseArray);
+      chosenReset();
+      // heartReset();
+
+      console.log(missed);
     }
-    chosenReset();
+
   });
 
 
