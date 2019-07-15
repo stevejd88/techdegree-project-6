@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   const phrases = [
-    `all that and a bag of chips`,
+    `raise the roof`,
     `talk to the hand`,
     `take a chill pill`,
     `eat my shorts`,
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function checkLetter(guess) {
     const letterAnswers = document.querySelectorAll('.letter');
     const li = document.querySelectorAll('.letter');
-    console.log(letterAnswers);
+    // console.log(letterAnswers);
     let match;
     for (let i = 0; i < letterAnswers.length; i +=1) {
       let show = letterAnswers[i].textContent;
@@ -69,12 +69,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (show.length === li.length) {
       overlay.style.display = 'inline';
       h1.textContent = 'YOU WIN!';
-      // btnReset.textContent = 'reset';
+      btnReset.textContent = 'reset';
       overlay.appendChild(h1);
       overlay.className = 'win';
     } else  if (missed === 5) {
       overlay.style.display = 'inline';
       h1.textContent = 'YOU LOSE!';
+      btnReset.textContent = 'reset';
       overlay.appendChild(h1);
       overlay.className = 'lose';
     }
@@ -83,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // event handler for letter clicking
   keyboard.addEventListener('click', (e) => {
     const guess = e.target.textContent;
-    console.log(guess);
+    // console.log(guess);
     if (e.target.tagName === 'BUTTON') {
       e.target.className += ' chosen';
       e.target.setAttribute('disabled', 'true');
@@ -103,11 +104,27 @@ document.addEventListener('DOMContentLoaded', () => {
     checkWin();
   });
 
-  // btnReset.addEventListener('click', (e) => {
-  //   if (btnReset.textContent === 'reset') {
-  //
-  //   }
-  // });
+function chosenReset() {
+  const chosen = document.querySelectorAll('.chosen');
+  for (let i = 0; i < chosen.length; i++) {
+    chosen[i].className = ' ';
+    chosen[i].removeAttribute('disabled');
+  }
+
+}
+
+//reset button
+  btnReset.addEventListener('click', (e) => {
+    if (btnReset.textContent === 'reset') {
+      let ul = phrase.firstElementChild;
+      while (ul.firstChild) {
+        ul.removeChild(ul.firstChild);
+      }
+      const phraseArray = getRandomPhraseAsArray(phrases);
+      addPhrasetoDisplay(phraseArray);
+    }
+    chosenReset();
+  });
 
 
 });
