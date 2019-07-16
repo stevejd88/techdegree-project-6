@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log(randomPhrase);
     return randomPhrase;
   }
+
 // function to add random phrase to board game
   function addPhrasetoDisplay(arr) {
     for (let i = 0; i < arr.length; i +=1) {
@@ -54,6 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
     for (let i = 0; i < letterAnswers.length; i +=1) {
       let show = letterAnswers[i].textContent;
       if (show === guess) {
+        li[i].classList.add('spin');
         li[i].className += ' show';
         match = show;
       }
@@ -72,6 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
       btnReset.textContent = 'reset';
       overlay.appendChild(h1);
       overlay.className = 'win';
+      show.className = ('show');
     } else  if (missed === 5) {
       overlay.style.display = 'inline';
       h1.textContent = 'YOU LOSE!';
@@ -98,11 +101,10 @@ document.addEventListener('DOMContentLoaded', () => {
       lostHeart.setAttribute('src', 'images/lostHeart.png');
       lostHeart.setAttribute('height', '35px');
       lostHeart.setAttribute('width', '30px');
+      li.appendChild(lostHeart);
       ol.removeChild(tries);
       ol.appendChild(li);
-      li.className = 'miss';
-      li.appendChild(lostHeart);
-      lostHeart.className = 'lost';
+
       missed += 1;
     }
     checkWin();
@@ -117,41 +119,40 @@ function chosenReset() {
   }
 }
 
-reset hearts
+// reset hearts
 function heartReset() {
-  const li = document.querySelectorAll('.miss');
-  const img = document.querySelectorAll('.lost');
-
-  console.log(img);
-  for (let i = 0; i < li.length; i++) {
-    li[i].removeChild(img[i]);
+  missed = 0;
+  const ol = document.querySelector('ol');
+  scoreboard.removeChild(ol);
+  const newTries = document.createElement('ol');
+  scoreboard.appendChild(newTries);
+  for (let i= 0; i < 5; i++) {
+    let li = document.createElement('li');
+    newTries.appendChild(li);
+    li.className = 'tries';
     const liveHeart = document.createElement('img');
     liveHeart.setAttribute('src', 'images/liveHeart.png');
     liveHeart.setAttribute('height', '35px');
     liveHeart.setAttribute('width', '30px');
-    li[i].appendChild(liveHeart);
-    li[i].className = 'tries';
+    li.appendChild(liveHeart);
   }
-
 }
 
 //reset button
   btnReset.addEventListener('click', (e) => {
     if (btnReset.textContent === 'reset') {
+      // window.location.reload();
       let ul = phrase.firstElementChild;
       while (ul.firstChild) {
         ul.removeChild(ul.firstChild);
       }
-      let missed = 0;
       const phraseArray = getRandomPhraseAsArray(phrases);
+      const h1 = document.querySelector('h1');
+      overlay.removeChild(h1);
       addPhrasetoDisplay(phraseArray);
       chosenReset();
       heartReset();
-
-      console.log(missed);
     }
-
   });
-
 
 });
