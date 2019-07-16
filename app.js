@@ -15,6 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
     `take a chill pill`,
     `eat my shorts`,
     `hasta la vista baby`,
+    `alrighty then`,
+    `how you doin`,
+    
   ];
   const phraseArray = getRandomPhraseAsArray(phrases);
 
@@ -26,7 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
 // function to pull a random phrase as an array
   function getRandomPhraseAsArray(arr){
     const randomPhrase = arr[Math.floor(Math.random() * arr.length)];
-    console.log(randomPhrase);
     return randomPhrase;
   }
 
@@ -50,7 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
   function checkLetter(guess) {
     const letterAnswers = document.querySelectorAll('.letter');
     const li = document.querySelectorAll('.letter');
-    // console.log(letterAnswers);
     let match;
     for (let i = 0; i < letterAnswers.length; i +=1) {
       let show = letterAnswers[i].textContent;
@@ -87,7 +88,6 @@ document.addEventListener('DOMContentLoaded', () => {
 // event handler for letter clicking
   keyboard.addEventListener('click', (e) => {
     const guess = e.target.textContent;
-    // console.log(guess);
     if (e.target.tagName === 'BUTTON') {
       e.target.className += ' chosen';
       e.target.setAttribute('disabled', 'true');
@@ -140,7 +140,6 @@ function heartReset() {
 //reset button
   btnReset.addEventListener('click', (e) => {
     if (btnReset.textContent === 'reset') {
-      // window.location.reload();
       let ul = phrase.firstElementChild;
       while (ul.firstChild) {
         ul.removeChild(ul.firstChild);
