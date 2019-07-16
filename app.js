@@ -17,7 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
     `hasta la vista baby`,
     `alrighty then`,
     `how you doin`,
-    
   ];
   const phraseArray = getRandomPhraseAsArray(phrases);
 
@@ -85,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-// event handler for letter clicking
+/// event handler for letter clicking
   keyboard.addEventListener('click', (e) => {
     const guess = e.target.textContent;
     if (e.target.tagName === 'BUTTON') {
