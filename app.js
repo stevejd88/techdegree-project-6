@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     `talk to the hand`,
     `take a chill pill`,
     `eat my shorts`,
-    `hasta la vista baby`
+    `hasta la vista baby`,
   ];
   const phraseArray = getRandomPhraseAsArray(phrases);
 
@@ -63,24 +63,24 @@ document.addEventListener('DOMContentLoaded', () => {
     return match;
   }
 
+// win or lose screen display
+  function winOrLose(content, name) {
+    let h1 = document.createElement('h1');
+    overlay.style.display = 'inline';
+    h1.textContent = content;
+    btnReset.textContent = 'reset';
+    overlay.appendChild(h1);
+    overlay.className = name;
+  }
+
 // function that will  edit screen on win or lose
   function checkWin() {
     const show = document.querySelectorAll('.show');
     const li = document.querySelectorAll('.letter');
-    const h1 = document.createElement('h1');
     if (show.length === li.length) {
-      overlay.style.display = 'inline';
-      h1.textContent = 'YOU WIN!';
-      btnReset.textContent = 'reset';
-      overlay.appendChild(h1);
-      overlay.className = 'win';
-      show.className = ('show');
+      winOrLose('YOU WIN!', 'win');
     } else  if (missed === 5) {
-      overlay.style.display = 'inline';
-      h1.textContent = 'YOU LOSE!';
-      btnReset.textContent = 'reset';
-      overlay.appendChild(h1);
-      overlay.className = 'lose';
+      winOrLose('YOU LOSE!', 'lose');
     }
   }
 
@@ -96,15 +96,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (letterFound === undefined && e.target.tagName === 'BUTTON') {
       const ol = document.querySelector('ol');
       const tries = document.querySelector('.tries');
-      const lostHeart = document.createElement('img');
       const li = document.createElement('li');
+      const lostHeart = document.createElement('img');
       lostHeart.setAttribute('src', 'images/lostHeart.png');
       lostHeart.setAttribute('height', '35px');
       lostHeart.setAttribute('width', '30px');
       li.appendChild(lostHeart);
       ol.removeChild(tries);
       ol.appendChild(li);
-
       missed += 1;
     }
     checkWin();
